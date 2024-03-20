@@ -1,32 +1,50 @@
 <?php  
 
-include('Traits/stats.php');
 include('Traits/wispers.php');
 
 class Character  
 {
-    use Wispers, stats;
+    use Wispers;
     protected $hp ;
     public $damage ;
     protected $maxHp ;
-    protected $crit ;
+    protected $crit = 0.25;
     public $lastDamage ;
     public $XP ;
+    protected $str = 0; 
+    protected $dex = 0;
+    protected $lucky = 0 ;
     protected $statuses = ["Nothing", "Crit"  ,"Evade", "Died", "Attack", "Hits"]; 
-
+    protected $skillpoints = 0;
     protected $name ;
+//$str $dex $lucky
 
 
+
+    public function getSkillPoint($skillpoints)
+    {
+        $this->skillpoints = $this->skillpoints + $skillpoints;
+    }
+    public function howSkillPoint()
+    {
+        return $this->skillpoints;
+    }
+    public function paySkillpoints(){
+
+    }
+    
     public function attack(){
-        if($this->doesLuckyShot()){$dd =["Status"=>$this->statuses[1] ,"Deals"=>$this->damage + $this->damage * 0.25]; $this->lastDamage = $dd; }
+        if($this->doesLuckyShot()){$dd =["Status"=>$this->statuses[1] ,"Deals"=>$this->damage + $this->damage * ($this->crit+$this->dex*0.05)]; $this->lastDamage = $dd; }
         else $dd = ["Status"=>$this->statuses[4],"Deals"=>$this->damage];
         return $dd;
     }
     public function doesLuckyShot() 
-    {
-        if($this->crit == 0) return false;
-        elseif( rand(0, 10 - ($this->crit) == 10-$this->crit)) return true;
+    {   
+        if( rand(0, 100) <= $this->dex *5) return true;
         else return false;
+    }
+    protected function calcCrit(){
+        return ;
     }
     public function hits($damage){
         if($this->evade() == true) {$hh =["Status"=> $this->statuses[2] ];}
@@ -36,7 +54,7 @@ class Character
     }
     public function evade(){
         $rand = rand(0,99);
-        if($rand <= $this->dex) return true;
+        if($rand <= $this->lucky*3.5) return true;
         return false;
     }
     

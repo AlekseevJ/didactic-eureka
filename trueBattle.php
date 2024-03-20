@@ -1,6 +1,0 @@
-<?php
-
-
-
-
-// perenesti suda vsyo;

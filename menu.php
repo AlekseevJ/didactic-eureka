@@ -8,10 +8,14 @@ class Menu
     protected $speedC = null;
     protected $chooseDiff = "Choose difficulty:".PHP_EOL."1. Easy".PHP_EOL."2. Medium".PHP_EOL;
     private $exitMenu = false;
-    private $actionList = ['Инвентарь'];
-    public function menu(){
+    private $actionList = ['Инвентарь', 'Пойти дальше'];
+    private $pointChoouse = ['ПОВЫСИТЬ УРОВЕНЬ'];
+
+    public function menu($points = 0){
         $string = '';
-        foreach($this->actionList as $k=>$v){
+        if($points> 0) $list =array_merge($this->actionList,$this->pointChoouse);
+        else $list = $this->actionList;
+        foreach($list as $k=>$v){
             $string .="[" . $k+1 . "]" . ' ' . $v . PHP_EOL;
            
         }
@@ -44,5 +48,10 @@ class Menu
             //if($k%3) usleep(rand(1,400)*1000);
         }
     }
+
+
+}
+public function levelUp(){
+    
 }
 }
