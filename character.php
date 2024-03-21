@@ -29,10 +29,52 @@ class Character
     {
         return $this->skillpoints;
     }
-    public function paySkillpoints(){
+    public function paySkillpoints($sk){
+        switch ($sk) {
+            case 0:
+                if($this->str <20){$this->str = (int)  $this->str+ 1;
+                echo "your strong increased".PHP_EOL;
+                $this->sellSkillpoint();
+                $this->updatetStats();
+                } else echo "you are strong like buivol".PHP_EOL;
+                return false;
+                
+            case 1:
+                if($this->dex <20){
+                $this->dex = (int) $this->dex + 1;
+                echo "your agiled".PHP_EOL;
+                $this->sellSkillpoint();}
+                else echo "you are swift like wind".PHP_EOL;
+                return false;
 
+            case 2:
+                if($this->lucky <20){
+                $this->lucky = (int) $this->lucky+ 1;
+                echo "luck increased".PHP_EOL;
+                $this->sellSkillpoint();}
+                else echo "you are luck like a godness of luck".PHP_EOL;
+                return false;
+            
+            case 3:
+                
+                return true;
+
+            default:
+                # code...
+                break;
+            }
+        
     }
-    
+    public function updatetStats(){
+        $this->damage = $this->damage * 1.1;
+        $this->maxHp = $this->maxHp *1.1;
+    }
+    protected function sellSkillpoint(): void{
+        $this->skillpoints = $this->skillpoints - 1;
+    }
+    public function myStats(){
+       echo "str $this->str dex $this->dex luck $this->lucky ".PHP_EOL;
+    }
     public function attack(){
         if($this->doesLuckyShot()){$dd =["Status"=>$this->statuses[1] ,"Deals"=>$this->damage + $this->damage * ($this->crit+$this->dex*0.05)]; $this->lastDamage = $dd; }
         else $dd = ["Status"=>$this->statuses[4],"Deals"=>$this->damage];
@@ -54,7 +96,8 @@ class Character
     }
     public function evade(){
         $rand = rand(0,99);
-        if($rand <= $this->lucky*3.5) return true;
+        if($this->lucky >=10 && $rand <= 60 + (($this->lucky - 10) * 3.5 )) {return true;}
+        elseif($rand <= $this->lucky*5 ) return true;
         return false;
     }
     

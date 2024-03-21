@@ -13,12 +13,13 @@ class Hiro extends Character
     {
         $this->hp = 100;
         $this->maxHp = 100;
-        $this->damage = 103;
+        $this->damage = 33;
         $this->name = 'Hiro';
         $this->levelXP = 1;
         $this->neededXP = 100;
         $this->currentXP = 0;
         $this->dex = 15;
+        $this->lucky = 15;
 
     }
 

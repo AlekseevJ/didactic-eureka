@@ -14,7 +14,7 @@ class Evil extends Character
         $this->maxHp = 50*$lv+20*$heroLVl;
         $this->damage = 13*$lv+3*$heroLVl;
         $this->name = $array[array_rand( $array)];
-        $this->XP = 220 ;// 45*$lv +10*$heroLVl;
+        $this->XP = 820 ;// 45*$lv +10*$heroLVl;
     }
 
 

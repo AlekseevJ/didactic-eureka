@@ -9,12 +9,13 @@ class Menu
     protected $chooseDiff = "Choose difficulty:".PHP_EOL."1. Easy".PHP_EOL."2. Medium".PHP_EOL;
     private $exitMenu = false;
     private $actionList = ['Инвентарь', 'Пойти дальше'];
-    private $pointChoouse = ['ПОВЫСИТЬ УРОВЕНЬ'];
+    private $pointChoouse = ['LEVEL-UP'];
 
     public function menu($points = 0){
         $string = '';
         if($points> 0) $list =array_merge($this->actionList,$this->pointChoouse);
         else $list = $this->actionList;
+        
         foreach($list as $k=>$v){
             $string .="[" . $k+1 . "]" . ' ' . $v . PHP_EOL;
            
@@ -27,7 +28,28 @@ class Menu
         $ans = readline("Choose:");
         
         $i++;
-        }while(!in_array((int) $ans - 1, array_keys($this->actionList)));
+        }while(!in_array((int) $ans - 1, array_keys($list)));
+        return $ans;
+    }
+
+    public function customMenu($array, $startring ="Choouse action:")
+    {
+        
+    $string = '';
+        foreach($array as $k=>$v){
+            $string .="[" . $k+1 . "]" . ' ' . $v . PHP_EOL;
+           
+        }
+        $i=0;
+        do{
+            
+        echo $startring.PHP_EOL.$string;
+        if($i >0) echo"text the number";
+        $ans = readline("Choose:");
+        
+        $i++;
+        }while(!in_array((int) $ans - 1, array_keys($array)));
+        return $ans;
     }
 
     public function exit(){
