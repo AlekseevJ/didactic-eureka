@@ -151,13 +151,21 @@ class Battle
                 //4 reward
                 $this->rewards($this->evil->gainXP());
                 unset($this->evil);
-                for($i = 0; $i < 3 ;$i++){
+
                 $item = new Item;
                 echo "вы полчили ". $item->sayItemName();
                 $this->hiro->putInTheBag($item);
-                $item1 = new Item;
-                echo "вы полчили ". $item1->sayItemName();
-                $this->hiro->putInTheBag($item1);}
+//                 array(1) {
+//   [0]=>
+//   object(Item)#5 (3) {
+//     ["type":protected]=>
+//     string(9) "left_hand"
+//     ["name":protected]=>
+//     string(5) "knife"
+//     ["prefix":protected]=>
+//     string(9) "legendary"
+//   }
+// }
 
                 var_dump($this->hiro->showTheBag());die();
                 break;
